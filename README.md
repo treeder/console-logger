@@ -3,7 +3,13 @@ Tiny wrapper around console.log to match my other loggers like Google Cloud, Bas
 
 ## Usage
 
+```sh
+npm install treeder/console-logger
+```
+
 ```js
+import {ConsoleLogger} from "console-logger"
+
 let logger = new ConsoleLogger()
 if (c.env.BETTERSTACK) {
   logger = new BetterstackLogger({ ...JSON.parse(c.env.BETTERSTACK), data: { requestId: nanoid(), path: url.pathname } })
