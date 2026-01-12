@@ -7,7 +7,22 @@ export class ConsoleLogger {
     return this
   }
   log(...msg) {
-    console.log(...msg, this.data)
+    let data = { ...this.data }
+    for (let m of msg) {
+      if (m instanceof Error) {
+        data.stack = m.stack
+      }
+    }
+    for (let key in data) {
+      if (data[key] instanceof Error) {
+        data[key] = {
+          message: data[key].message,
+          stack: data[key].stack,
+          ...data[key]
+        }
+      }
+    }
+    console.log(...msg, data)
   }
   async flush() { }
 }
